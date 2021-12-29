@@ -1,6 +1,5 @@
 #! /usr/bin/env node
 import yargs from "yargs";
-
 import fetch from "node-fetch";
 import open from "open";
 
@@ -9,10 +8,11 @@ const res = await fetch(`https://www.reddit.com/.json`);
 const data = await res.json();
 const { children } = data.data;
 const randomPost = children[Math.floor(Math.random() * children.length)];
-const link = "https://reddit.com" + randomPost.data.permalink;
+const { title, permalink } = randomPost.data;
+const link = "https://reddit.com" + permalink;
 
 if (argv.print) {
-  console.log(randomPost.data.title);
+  console.log(title);
   console.log(link);
 } else {
   open(link);
