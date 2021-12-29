@@ -24,6 +24,12 @@ app.get("/todo", (req, res) => {
   res.json(db);
 });
 
+app.get("/todo/:id", (req, res) => {
+  const { id } = req.params;
+  const todo = db.find(todo => todo.id === +id);
+  res.json(todo);
+});
+
 app.listen(8000, () => {
   console.log("server is running");
 });
